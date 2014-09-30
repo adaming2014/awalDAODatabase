@@ -5,9 +5,12 @@
  */
 package fr.adaming.awal.dao;
 
+import fr.adaming.awal.dao.hibernate.HibernateUtil;
 import fr.adaming.awal.dao.interfaces.IRepairerDao;
 import fr.adaming.awal.entity.Repairer;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -15,23 +18,27 @@ import java.util.List;
  */
 public class RepairerDao implements IRepairerDao {
 
+    Session session = null;
+    Transaction transaction = null;
+
     @Override
     public List<Repairer> getAll() {
+        session = HibernateUtil.currentSession();
+        return session.createCriteria(Repairer.class).list();
+    }
+
+    @Override
+    public boolean create(Repairer repairer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean create(Repairer address) {
+    public boolean update(Repairer repairer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Repairer address) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean delete(Repairer address) {
+    public boolean delete(Repairer repairer) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
