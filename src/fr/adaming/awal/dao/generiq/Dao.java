@@ -104,4 +104,8 @@ public class Dao<T> implements IDao<T> {
         return entity;
     }
 
+    public Dao() {
+    }
+    
+
 }
