@@ -24,32 +24,112 @@ public class RepairerDao implements IRepairerDao {
     @Override
     public List<Repairer> getAll() {
         session = HibernateUtil.currentSession();
-        return session.createCriteria(Repairer.class).list();
+        List<Repairer> repairers = session.createCriteria(Repairer.class).list();
+        HibernateUtil.closeSession();
+
+        return repairers;
     }
 
     @Override
     public boolean create(Repairer repairer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = true;
+        session = HibernateUtil.currentSession();
+
+        try {
+            transaction = session.beginTransaction();
+            session.save(repairer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            result = false;
+        } finally {
+            HibernateUtil.closeSession();
+        }
+
+        return result;
     }
 
     @Override
     public boolean update(Repairer repairer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = true;
+        session = HibernateUtil.currentSession();
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(repairer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            result = false;
+        } finally {
+            HibernateUtil.closeSession();
+        }
+
+        return result;
     }
 
     @Override
     public boolean delete(Repairer repairer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = true;
+        session = HibernateUtil.currentSession();
+
+        try {
+            transaction = session.beginTransaction();
+            session.delete(repairer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            result = false;
+        } finally {
+            HibernateUtil.closeSession();
+        }
+
+        return result;
     }
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = true;
+        session = HibernateUtil.currentSession();
+
+        Repairer repairer = (Repairer) session.load(Repairer.class, id);
+        if (repairer == null) {
+            return false;
+        }
+
+        try {
+            transaction = session.beginTransaction();
+            session.delete(repairer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+
+            result = false;
+        } finally {
+            HibernateUtil.closeSession();
+        }
+
+        return result;
     }
 
     @Override
     public Repairer getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = HibernateUtil.currentSession();
+        Repairer repairer = (Repairer) session.load(Repairer.class, id);
+        HibernateUtil.closeSession();
+
+        return repairer;
     }
 
 }
