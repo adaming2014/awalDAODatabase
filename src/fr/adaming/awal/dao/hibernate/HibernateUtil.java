@@ -8,7 +8,9 @@ package fr.adaming.awal.dao.hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /**
  *
@@ -16,12 +18,17 @@ import org.hibernate.cfg.Configuration;
  */
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
+    private static ServiceRegistry serviceRegistry;
 
     static {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            Configuration configuration = new Configuration();
+            configuration.configure();
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (HibernateException ex) {
+            System.out.println(ex.getMessage());
             throw new RuntimeException("probleme de configuration" + ex.getMessage());
         }
     }
@@ -34,15 +41,15 @@ public class HibernateUtil {
             s = sessionFactory.openSession();
             session.set(s);
         }
+
         return s;
     }
 
     public static void closeSession() throws HibernateException {
         Session s = (Session) session.get();
         session.set(null);
-        if (s!=null) {
+        if (s != null) {
             s.close();
         }
     }
 }
-
