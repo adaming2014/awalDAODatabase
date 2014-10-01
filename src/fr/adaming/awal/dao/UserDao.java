@@ -6,8 +6,11 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.hibernate.HibernateUtil;
 import fr.adaming.awal.dao.interfaces.IUserDao;
 import fr.adaming.awal.entity.User;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -20,8 +23,8 @@ public class UserDao extends Dao<User> implements IUserDao {
     }
 
     @Override
-    public User getByEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User getByEmail(final String email) {
+        Session session = HibernateUtil.currentSession();
+        return (User) session.createCriteria(User.class).add(Restrictions.eq("mail", email)).uniqueResult();
     }
-
 }
