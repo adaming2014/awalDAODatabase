@@ -6,17 +6,22 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.interfaces.IUserDao;
 import fr.adaming.awal.entity.User;
 
 /**
  *
  * @author INTI0219
  */
-public class UserDao extends Dao<User>{
+public class UserDao extends Dao<User> implements IUserDao {
 
     public UserDao() {
         super(User.class);
     }
 
-    
+    @Override
+    public User getByEmail(String email) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

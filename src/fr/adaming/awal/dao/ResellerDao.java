@@ -6,16 +6,17 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.interfaces.IResellerDao;
 import fr.adaming.awal.entity.Reseller;
 
 /**
  *
  * @author INTI0217
  */
-public class ResellerDao extends Dao<Reseller>{
+public class ResellerDao extends Dao<Reseller> implements IResellerDao {
 
     public ResellerDao() {
         super(Reseller.class);
     }
-    
+
 }

@@ -8,13 +8,13 @@ package fr.adaming.awal.dao;
 import fr.adaming.awal.dao.generiq.Dao;
 import fr.adaming.awal.dao.interfaces.IClientDao;
 import fr.adaming.awal.entity.Client;
-import java.util.List;
 
 /**
  *
  * @author INTI0217
  */
-public class ClientDao extends Dao<Client>{  
+public class ClientDao extends Dao<Client> implements IClientDao {
+
     public ClientDao() {
         super(Client.class);
     }

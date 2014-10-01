@@ -6,15 +6,17 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.interfaces.IDeviceRepairDao;
+import fr.adaming.awal.entity.Devicerepair;
 
 /**
  *
  * @author INTI0227
  */
-public class Devicerepair extends Dao<Devicerepair>{
+public class DeviceRepairDao extends Dao<Devicerepair> implements IDeviceRepairDao {
 
-    public Devicerepair() {
+    public DeviceRepairDao() {
         super(Devicerepair.class);
     }
-    
+
 }

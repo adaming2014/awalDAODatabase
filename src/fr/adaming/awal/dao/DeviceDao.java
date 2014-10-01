@@ -6,16 +6,17 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.interfaces.IDeviceDao;
 import fr.adaming.awal.entity.Device;
 
 /**
  *
  * @author INTI0227
  */
-public class DeviceDao extends Dao<Device>{
+public class DeviceDao extends Dao<Device> implements IDeviceDao {
 
     public DeviceDao() {
         super(Device.class);
     }
-    
+
 }

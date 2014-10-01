@@ -6,16 +6,17 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.interfaces.IAddressDao;
 import fr.adaming.awal.entity.Address;
 
 /**
  *
  * @author INTI0217
  */
-public class AddressDao extends Dao<Address>{
+public class AddressDao extends Dao<Address> implements IAddressDao {
 
     public AddressDao() {
         super(Address.class);
     }
-    
+
 }

@@ -6,16 +6,17 @@
 package fr.adaming.awal.dao;
 
 import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.interfaces.IModelDao;
 import fr.adaming.awal.entity.Modele;
 
 /**
  *
  * @author INTI0217
  */
-public class ModelDao extends Dao<Modele>{
+public class ModelDao extends Dao<Modele> implements IModelDao {
 
     public ModelDao() {
         super(Modele.class);
     }
-    
+
 }
