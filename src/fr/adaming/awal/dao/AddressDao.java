@@ -14,8 +14,8 @@ import fr.adaming.awal.entity.Address;
  */
 public class AddressDao extends Dao<Address>{
 
-    public AddressDao(Class<Address> entityClass) {
-        super(entityClass);
+    public AddressDao() {
+        super(Address.class);
     }
     
 }

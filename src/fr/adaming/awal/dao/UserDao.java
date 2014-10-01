@@ -14,8 +14,8 @@ import fr.adaming.awal.entity.User;
  */
 public class UserDao extends Dao<User>{
 
-    public UserDao(Class<User> entityClass) {
-        super(entityClass);
+    public UserDao() {
+        super(User.class);
     }
 
     
