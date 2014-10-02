@@ -8,6 +8,7 @@ package fr.adaming.awal.dao;
 import fr.adaming.awal.dao.hibernate.HibernateUtil;
 import fr.adaming.awal.dao.interfaces.IRepairerDao;
 import fr.adaming.awal.entity.Repairer;
+import fr.adaming.awal.util.RepairerUtil;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -74,9 +75,9 @@ public class RepairerDaoTest {
         System.out.println("getAll");
 
         // Init expected results;
-        Repairer repairer1 = new Repairer().setAvailable(Repairer.AVAILABLE).setCompetence("Aucune").setEnterprise("Feu vert");
-        Repairer repairer2 = new Repairer().setAvailable(Repairer.AVAILABLE).setCompetence("Mobile").setEnterprise("LG");
-        Repairer repairer3 = new Repairer().setAvailable(Repairer.AVAILABLE).setCompetence("Microonde").setEnterprise("Calor");
+        Repairer repairer1 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
+        Repairer repairer2 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
+        Repairer repairer3 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
 
         List<Repairer> expResult = new ArrayList<>();
         expResult.add(repairer1);
@@ -103,7 +104,7 @@ public class RepairerDaoTest {
 
         // Init stubs
         Repairer repairer = new Repairer();
-        repairer.setAvailable(Repairer.AVAILABLE);
+        repairer.setAvailable(RepairerUtil.AVAILABLE);
 
         // Init expected results;
         boolean expResult = true;
