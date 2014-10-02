@@ -19,9 +19,8 @@ import org.hibernate.Transaction;
  */
 public class ClientDao extends Dao<Client> implements IClientDao {
     
-    private String reqUserByMail = "SELECT u FROM User u WHERE u.mail = :mail";
-    private String reqUserInnerClient = "SELECT u FROM Client u WHERE u.user = :user";
-    
+    private String reClientByMail = "SELECT c FROM Client as c"
+            + " inner join c.user as u WHERE u.mail = :mail";
     public ClientDao() {
         super(Client.class);
     }
@@ -29,7 +28,9 @@ public class ClientDao extends Dao<Client> implements IClientDao {
     @Override
     public Client getClientByMail(String mail) {
         Session session = HibernateUtil.currentSession();
-        Client client = (Client) session.createQuery(reqUserInnerClient).setParameter("user", session.createQuery(reqUserByMail).setString("mail", mail).uniqueResult()).uniqueResult();
+        
+        Client client = (Client) session.createQuery(reClientByMail).setString("mail", mail).uniqueResult();
+        
         HibernateUtil.closeSession();
         return client;
     }
