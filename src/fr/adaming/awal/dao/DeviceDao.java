@@ -23,6 +23,7 @@ import org.hibernate.Transaction;
 public class DeviceDao extends Dao<Device> implements IDeviceDao {
 
     private String reqDevicesByClient = "SELECT u FROM Device u WHERE u.client = :client";
+
     public DeviceDao() {
         super(Device.class);
     }
@@ -31,18 +32,9 @@ public class DeviceDao extends Dao<Device> implements IDeviceDao {
     public List<Device> getDevicesByClient(Client client) {
         List<Device> entites = null;
         Session session = HibernateUtil.currentSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            Query q = session.createQuery(reqDevicesByClient).setParameter("client", client);
-            entites = q.list();
-            transaction.commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
+        Query q = session.createQuery(reqDevicesByClient).setParameter("client", client);
+        entites = q.list();
+        HibernateUtil.closeSession();
         return entites;
     }
 
