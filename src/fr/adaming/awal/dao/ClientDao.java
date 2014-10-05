@@ -9,9 +9,7 @@ import fr.adaming.awal.dao.generiq.Dao;
 import fr.adaming.awal.dao.hibernate.HibernateUtil;
 import fr.adaming.awal.dao.interfaces.IClientDao;
 import fr.adaming.awal.entity.Client;
-import fr.adaming.awal.entity.User;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *

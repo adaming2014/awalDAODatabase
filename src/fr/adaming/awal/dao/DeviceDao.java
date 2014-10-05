@@ -11,10 +11,8 @@ import fr.adaming.awal.dao.interfaces.IDeviceDao;
 import fr.adaming.awal.entity.Client;
 import fr.adaming.awal.entity.Device;
 import java.util.List;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
