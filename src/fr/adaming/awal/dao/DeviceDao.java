@@ -13,6 +13,7 @@ import fr.adaming.awal.entity.Device;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -30,8 +31,9 @@ public class DeviceDao extends Dao<Device> implements IDeviceDao {
     public List<Device> getDevicesByClient(Client client) {
         List<Device> entites = null;
         Session session = HibernateUtil.currentSession();
-        Query q = session.createQuery(reqDevicesByClient).setParameter("client", client);
-        entites = q.list();
+//        Query q = session.createQuery(reqDevicesByClient).setParameter("client", client);
+        entites = session.createCriteria(Device.class).add(Restrictions.eq("client", client)).list();
+//        entites = q.list();
         HibernateUtil.closeSession();
         return entites;
     }
