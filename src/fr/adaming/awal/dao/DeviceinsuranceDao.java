@@ -22,8 +22,8 @@ import org.hibernate.criterion.Restrictions;
  */
 public class DeviceinsuranceDao extends Dao<Deviceinsurance> implements IDeviceInsuranceDao {
 
-    private String reqDevicesInsuranceByClient = "SELECT d FROM Deviceinsurance as c"
-            + " inner join c.device as u WHERE u.client = :client";
+    private String reqDevicesInsuranceByClient = "SELECT d FROM Deviceinsurance as d"
+            + " inner join d.device as u WHERE u.client = :client";
 
     public DeviceinsuranceDao() {
         super(Deviceinsurance.class);
