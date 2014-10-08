@@ -75,18 +75,18 @@ public class RepairerDaoTest {
         System.out.println("getAll");
 
         // Init expected results;
-        Repairer repairer1 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
-        Repairer repairer2 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
-        Repairer repairer3 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
+//        Repairer repairer1 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
+//        Repairer repairer2 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
+//        Repairer repairer3 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
 
         List<Repairer> expResult = new ArrayList<>();
-        expResult.add(repairer1);
-        expResult.add(repairer2);
-        expResult.add(repairer3);
-
-        repairerDao.create(repairer1);
-        repairerDao.create(repairer2);
-        repairerDao.create(repairer3);
+//        expResult.add(repairer1);
+//        expResult.add(repairer2);
+//        expResult.add(repairer3);
+//
+//        repairerDao.create(repairer1);
+//        repairerDao.create(repairer2);
+//        repairerDao.create(repairer3);
 
         // Test
         List<Repairer> result = repairerDao.getAll();
