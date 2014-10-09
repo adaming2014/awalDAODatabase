@@ -5,23 +5,20 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
-import fr.adaming.awal.dao.hibernate.HibernateUtil;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IDeviceRepairDao;
 import fr.adaming.awal.entity.Client;
 import fr.adaming.awal.entity.Devicerepair;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 /**
  *
  * @author INTI0227
  */
-public class DeviceRepairDao extends Dao<Devicerepair> implements IDeviceRepairDao {
+public class DeviceRepairDao extends HibernateDao<Devicerepair, Integer> implements IDeviceRepairDao {
 
-    private String reqDevicesRepairByClient = "SELECT d FROM Devicerepair as d"
-            + " inner join d.device as e WHERE e.client = :client";
+    private static final String REQUEST_DEVICE_REPAIR_BY_CLIENT = "SELECT d FROM Devicerepair as d"
+            + " INNER JOIN d.device as e WHERE e.client = :client";
 
     public DeviceRepairDao() {
         super(Devicerepair.class);
@@ -29,12 +26,7 @@ public class DeviceRepairDao extends Dao<Devicerepair> implements IDeviceRepairD
 
     @Override
     public List<Devicerepair> getDevicesRepairByClient(Client client) {
-        List<Devicerepair> devicerepairs = null;
-        Session session = HibernateUtil.currentSession();
-        Query q = session.createQuery(reqDevicesRepairByClient).setParameter("client", client);
-        devicerepairs = q.list();
-        HibernateUtil.closeSession();
-        return devicerepairs;
+        return getSession().createQuery(REQUEST_DEVICE_REPAIR_BY_CLIENT).setParameter("client", client).list();
     }
 
 }

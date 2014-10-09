@@ -5,31 +5,25 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
-import fr.adaming.awal.dao.hibernate.HibernateUtil;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IClientDao;
 import fr.adaming.awal.entity.Client;
-import org.hibernate.Session;
 
 /**
  *
  * @author INTI0217
  */
-public class ClientDao extends Dao<Client> implements IClientDao {
-    
-    private String reClientByMail = "SELECT c FROM Client as c"
-            + " inner join c.user as u WHERE u.mail = :mail";
+public class ClientDao extends HibernateDao<Client, Integer> implements IClientDao {
+
+    private static final String REQUEST_CLIENT_BY_MAIL = "SELECT c FROM Client as c"
+            + " INNER JOIN c.user as u WHERE u.mail = :mail";
+
     public ClientDao() {
         super(Client.class);
     }
 
     @Override
-    public Client getClientByMail(String mail) {
-        Session session = HibernateUtil.currentSession();
-        
-        Client client = (Client) session.createQuery(reClientByMail).setString("mail", mail).uniqueResult();
-        
-        HibernateUtil.closeSession();
-        return client;
+    public Client getClientByMail(final String mail) {
+        return (Client) getSession().createQuery(REQUEST_CLIENT_BY_MAIL).setString("mail", mail).uniqueResult();
     }
 }

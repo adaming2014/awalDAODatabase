@@ -5,18 +5,16 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
-import fr.adaming.awal.dao.hibernate.HibernateUtil;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IUserDao;
 import fr.adaming.awal.entity.User;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author INTI0219
  */
-public class UserDao extends Dao<User> implements IUserDao {
+public class UserDao extends HibernateDao<User, Integer> implements IUserDao {
 
     public UserDao() {
         super(User.class);
@@ -24,7 +22,6 @@ public class UserDao extends Dao<User> implements IUserDao {
 
     @Override
     public User getByEmail(final String email) {
-        Session session = HibernateUtil.currentSession();
-        return (User) session.createCriteria(User.class).add(Restrictions.eq("mail", email)).uniqueResult();
+        return (User) getSession().createCriteria(User.class).add(Restrictions.eq("mail", email)).uniqueResult();
     }
 }

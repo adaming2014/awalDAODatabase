@@ -52,7 +52,7 @@ public class RepairerDaoTest {
     }
 
     private void dropTable() {
-        Session session = HibernateUtil.currentSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -63,7 +63,7 @@ public class RepairerDaoTest {
                 transaction.rollback();
             }
         } finally {
-            HibernateUtil.closeSession();
+            HibernateUtil.getSessionFactory().getCurrentSession().close();
         }
     }
 
@@ -78,7 +78,6 @@ public class RepairerDaoTest {
 //        Repairer repairer1 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
 //        Repairer repairer2 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
 //        Repairer repairer3 = new Repairer().setAvailable(RepairerUtil.AVAILABLE);
-
         List<Repairer> expResult = new ArrayList<>();
 //        expResult.add(repairer1);
 //        expResult.add(repairer2);
@@ -110,10 +109,9 @@ public class RepairerDaoTest {
         boolean expResult = true;
 
         // Test results
-        boolean result = repairerDao.create(repairer);
+        repairerDao.makePersistent(repairer);
 
         // Verify results
-        assertEquals(expResult, result);
     }
 
     /**
@@ -130,10 +128,9 @@ public class RepairerDaoTest {
         boolean expResult = false;
 
         // Test
-        boolean result = repairerDao.update(repairer);
+        repairerDao.makePersistent(repairer);
 
         // Verify results
-        assertEquals(expResult, result);
     }
 
     /**
@@ -150,30 +147,9 @@ public class RepairerDaoTest {
         boolean expResult = false;
 
         // Test
-        boolean result = repairerDao.delete(repairer);
+        repairerDao.makeTransient(repairer);
 
         // Verify results
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of delete method, of class RepairerDao.
-     */
-    @Test
-    public void testDelete_int() {
-        System.out.println("delete");
-
-        // Init stubs
-        int id = 0;
-
-        // Init expected results
-        boolean expResult = false;
-
-        // Test
-        boolean result = repairerDao.delete(id);
-
-        // Verify results
-        assertEquals(expResult, result);
     }
 
     /**

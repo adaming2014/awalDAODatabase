@@ -32,24 +32,8 @@ public class HibernateUtil {
             throw new RuntimeException("probleme de configuration" + ex.getMessage());
         }
     }
-
-    private static final ThreadLocal session = new ThreadLocal();
-
-    public static Session currentSession() throws HibernateException {
-        Session s = (Session) session.get();
-        if (null == s) {
-            s = sessionFactory.openSession();
-            session.set(s);
-        }
-
-        return s;
-    }
-
-    public static void closeSession() throws HibernateException {
-        Session s = (Session) session.get();
-        session.set(null);
-        if (s != null) {
-            s.close();
-        }
+    
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 }

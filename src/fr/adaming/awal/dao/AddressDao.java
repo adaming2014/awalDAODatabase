@@ -5,7 +5,7 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IAddressDao;
 import fr.adaming.awal.entity.Address;
 
@@ -13,7 +13,7 @@ import fr.adaming.awal.entity.Address;
  *
  * @author INTI0217
  */
-public class AddressDao extends Dao<Address> implements IAddressDao {
+public class AddressDao extends HibernateDao<Address, Integer> implements IAddressDao {
 
     public AddressDao() {
         super(Address.class);

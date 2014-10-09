@@ -5,7 +5,7 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IAdminDao;
 import fr.adaming.awal.entity.Admin;
 
@@ -13,7 +13,7 @@ import fr.adaming.awal.entity.Admin;
  *
  * @author INTI0227
  */
-public class AdminDao extends Dao<Admin> implements IAdminDao {
+public class AdminDao extends HibernateDao<Admin, Integer> implements IAdminDao {
 
     public AdminDao() {
         super(Admin.class);

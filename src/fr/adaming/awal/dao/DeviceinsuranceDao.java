@@ -5,25 +5,20 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
-import fr.adaming.awal.dao.hibernate.HibernateUtil;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IDeviceInsuranceDao;
 import fr.adaming.awal.entity.Client;
-import fr.adaming.awal.entity.Device;
 import fr.adaming.awal.entity.Deviceinsurance;
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author INTI0227
  */
-public class DeviceinsuranceDao extends Dao<Deviceinsurance> implements IDeviceInsuranceDao {
+public class DeviceinsuranceDao extends HibernateDao<Deviceinsurance, Integer> implements IDeviceInsuranceDao {
 
-    private String reqDevicesInsuranceByClient = "SELECT d FROM Deviceinsurance as d"
-            + " inner join d.device as u WHERE u.client = :client";
+    private static final String REQUEST_DEVICE_INSURANCE_BY_CLIENT = "SELECT d FROM Deviceinsurance as d"
+            + " INNER JOIN d.device as u WHERE u.client = :client";
 
     public DeviceinsuranceDao() {
         super(Deviceinsurance.class);
@@ -31,12 +26,7 @@ public class DeviceinsuranceDao extends Dao<Deviceinsurance> implements IDeviceI
 
     @Override
     public List<Deviceinsurance> getDevicesInsuranceByClient(Client client) {
-        List<Deviceinsurance> entites = null;
-        Session session = HibernateUtil.currentSession();
-        Query q = session.createQuery(reqDevicesInsuranceByClient).setParameter("client", client);
-        entites = q.list();
-        HibernateUtil.closeSession();
-        return entites;
+        return getSession().createQuery(REQUEST_DEVICE_INSURANCE_BY_CLIENT).setParameter("client", client).list();
     }
 
 }

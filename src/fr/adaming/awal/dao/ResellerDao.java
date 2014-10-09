@@ -5,7 +5,7 @@
  */
 package fr.adaming.awal.dao;
 
-import fr.adaming.awal.dao.generiq.Dao;
+import fr.adaming.awal.dao.generiq.HibernateDao;
 import fr.adaming.awal.dao.interfaces.IResellerDao;
 import fr.adaming.awal.entity.Reseller;
 
@@ -13,7 +13,7 @@ import fr.adaming.awal.entity.Reseller;
  *
  * @author INTI0217
  */
-public class ResellerDao extends Dao<Reseller> implements IResellerDao {
+public class ResellerDao extends HibernateDao<Reseller, Integer> implements IResellerDao {
 
     public ResellerDao() {
         super(Reseller.class);
