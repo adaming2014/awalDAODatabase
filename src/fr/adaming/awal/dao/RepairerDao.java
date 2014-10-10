@@ -23,6 +23,6 @@ public class RepairerDao extends HibernateDao<Repairer, Integer> implements IRep
 
     @Override
     public Repairer getRepairerByUserId(Integer id) {
-        return (Repairer)getSession().createQuery(REQUEST_REPAIRER_BY_ID).setInteger("id", id); 
+        return (Repairer)getSession().createQuery(REQUEST_REPAIRER_BY_ID).setInteger("id", id).uniqueResult(); 
     }
 }

@@ -25,7 +25,7 @@ public class ResellerDao extends HibernateDao<Reseller, Integer> implements IRes
 
     @Override
     public Reseller getResellerByUSerId(Integer id) {
-        return (Reseller) getSession().createQuery(REQUEST_RESELLER_BY_ID).setInteger("id", id);
+        return (Reseller) getSession().createQuery(REQUEST_RESELLER_BY_ID).setInteger("id", id).uniqueResult();
     }
 
 }

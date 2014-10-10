@@ -25,6 +25,6 @@ public class AdminDao extends HibernateDao<Admin, Integer> implements IAdminDao 
     @Override
     public Admin getAdminByUserId(Integer id) {
         //getSession().createCriteria(Admin.class).add(Restrictions.eq("user", user)).uniqueResult();
-        return (Admin)getSession().createQuery(REQUEST_ADMIN_BY_ID).setInteger("id", id);
+        return (Admin)getSession().createQuery(REQUEST_ADMIN_BY_ID).setInteger("id", id).uniqueResult();
     }
 }

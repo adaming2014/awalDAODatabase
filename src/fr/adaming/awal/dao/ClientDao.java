@@ -34,7 +34,7 @@ public class ClientDao extends HibernateDao<Client, Integer> implements IClientD
 
     @Override
     public Client getClientByUserId(Integer id) {
-        return (Client) getSession().createQuery(REQUEST_CLIENT_BY_ID).setInteger("id", id);
+        return (Client) getSession().createQuery(REQUEST_CLIENT_BY_ID).setInteger("id", id).uniqueResult();
     }
 
     @Override
