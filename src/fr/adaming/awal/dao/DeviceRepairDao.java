@@ -11,6 +11,7 @@ import fr.adaming.awal.entity.Client;
 import fr.adaming.awal.entity.Device;
 import fr.adaming.awal.entity.Devicerepair;
 import fr.adaming.awal.entity.Modelpackage;
+import fr.adaming.awal.entity.Repairer;
 import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
@@ -30,6 +31,11 @@ public class DeviceRepairDao extends HibernateDao<Devicerepair, Integer> impleme
     @Override
     public List<Devicerepair> getDevicesRepairByClient(final Client client) {
         return getSession().createQuery(REQUEST_DEVICE_REPAIR_BY_CLIENT).setParameter("client", client).list();
+    }
+
+    @Override
+    public List<Devicerepair> getDevicesRepairByRepairer(final Repairer repairer) {
+        return getSession().createCriteria(Devicerepair.class).add(Restrictions.eq("repairer", repairer)).list();
     }
 
     @Override
