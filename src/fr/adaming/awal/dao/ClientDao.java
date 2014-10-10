@@ -17,6 +17,8 @@ public class ClientDao extends HibernateDao<Client, Integer> implements IClientD
 
     private static final String REQUEST_CLIENT_BY_MAIL = "SELECT c FROM Client as c"
             + " INNER JOIN c.user as u WHERE u.mail = :mail";
+    private static final String REQUEST_CLIENT_BY_ID = "SELECT c FROM Client as c "+
+            "INNER JOIN c.user as u WHERE u.id = :id";
 
     public ClientDao() {
         super(Client.class);
@@ -25,5 +27,10 @@ public class ClientDao extends HibernateDao<Client, Integer> implements IClientD
     @Override
     public Client getClientByMail(final String mail) {
         return (Client) getSession().createQuery(REQUEST_CLIENT_BY_MAIL).setString("mail", mail).uniqueResult();
+    }
+
+    @Override
+    public Client getClientByUserId(Integer id) {
+        return (Client)getSession().createQuery(REQUEST_CLIENT_BY_ID).setInteger("id", id);
     }
 }

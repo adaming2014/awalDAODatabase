@@ -15,7 +15,14 @@ import fr.adaming.awal.entity.Repairer;
  */
 public class RepairerDao extends HibernateDao<Repairer, Integer> implements IRepairerDao {
 
+    private static final String REQUEST_REPAIRER_BY_ID = "SELECT r FROM Repairer as r "+
+            "INNER JOIN r.user as u WHERE u.id = :id";
     public RepairerDao() {
         super(Repairer.class);
+    }
+
+    @Override
+    public Repairer getRepairerByUserId(Integer id) {
+        return (Repairer)getSession().createQuery(REQUEST_REPAIRER_BY_ID).setInteger("id", id); 
     }
 }
